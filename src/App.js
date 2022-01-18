@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home";
 import GlobalFonts from './fonts/fonts'
+import Home from "./pages/Home";
+import Homepage from "./pages/Homepage";
 
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
       <GlobalFonts />
       <BrowserRouter>
         <Routes>
-          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/homepage" element={<Homepage />} />
         </Routes>
       </BrowserRouter>
     </>
