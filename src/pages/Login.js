@@ -1,3 +1,4 @@
+import React from 'react'
 
 import { Modal, Button, Form } from "react-bootstrap"
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -7,6 +8,7 @@ import { default as twitterBlue } from '../images/twitter-blue.svg'
 
 import { useFormik } from "formik"
 import *  as Yup from 'yup'
+// import { useNavigate, Link } from "react-router-dom";
 
 
 const ImgSvgModal = styled.img`
@@ -21,80 +23,65 @@ const ImgSvgModal = styled.img`
 
 const H2 = styled.h2`
   font-family: 'Twitter';
-  font-size: 22px;
+  font-size: 35px;
   font-weight: 700;
   margin-bottom: 30px;
 `
 
-const Signup = props => {
+const Login = props => {
 
+  // const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
       username: "Leslie",
       password: "hellohello",
-      passwordConfirmation: "hellohello",
-      email: "les@les.les"
     },
 
     onSubmit: values => {
-      signup(values)
+      login(values)
     },
     validateOnChange: false,
     validationSchema: Yup.object({
       username: Yup.string().required("Username is required"),
-      password: Yup.string().required("Password is required").min(8, "Password is too short"),
-      passwordConfirmation: Yup.string()
-        .oneOf([Yup.ref("password"), null], 'Password must match'),
-      email: Yup.string().required("Email is required").email("Email is invalid")
+      password: Yup.string().required("Password is required")
     })
   })
 
-  const signup = async values => {
-    const signupResponse = await fetch('http://localhost:5000/signup', {
+  const login = async values => {
+
+    // fetch signup
+    const response = await fetch('http://localhost:5000/login', {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({
-        username: values.username,
-        email: values.email,
-        password: values.password
-      })
+      body: JSON.stringify(values)
     })
 
-    const user = await signupResponse.json()
 
-    if (user.error) {
-      alert(user.error)
+    if (response.error) {
+      alert(response.error)
       return
     }
 
-    const loginResponse = await fetch('http://localhost:5000/login', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        username: user.username,
-        password: user.password
-      })
-    })
-
-    if (loginResponse.status >= 400) {
-      alert(loginResponse.statusText)
+    if (response.status >= 400) {
+      alert(response.statusText)
     } else {
-      console.log(loginResponse)
-      // ('/home')
+      console.log(response)
+      //navigate('')
     }
+
+    //const togglePasswordVisible = () => {
+    //setPasswordVisible(!passwordVisible)
+    //}
 
   }
 
   return (
     <Modal
-      show={props.show}
+      show={props.showModeLogin}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -113,13 +100,13 @@ const Signup = props => {
 
           <Form.Group onSubmit={formik.handleSubmit} className="mb-3" controlId="formBasicEmail">
             <Form.Label>Addresse e-mail</Form.Label>
-            <Form.Control 
+            <Form.Control
               isInvalid={formik.errors.username}
               onChange={formik.handleChange}
-              type="email" 
-              name="email" 
-              plac eholder="Entrez votre email" 
-              style={{ borderRadius: 50 }} 
+              type="text"
+              name="username"
+              plac eholder="Entrez votre username"
+              style={{ borderRadius: 50 }}
             />
             <Form.Text className="text-muted">
             </Form.Text>
@@ -127,23 +114,12 @@ const Signup = props => {
 
           <Form.Group onSubmit={formik.handleSubmit} className="mb-3" controlId="formBasicPassword">
             <Form.Label>Mot de passe</Form.Label>
-            <Form.Control 
+            <Form.Control
               isInvalid={formik.errors.password}
               onChange={formik.handleChange}
               type="password"
-              name="password" 
-              placeholder="Entrez un nouveau mot de passe" 
-              style={{ borderRadius: 50 }} />
-          </Form.Group>
-
-          <Form.Group onSubmit={formik.handleSubmit} className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Confirmation du mot de passe</Form.Label>
-            <Form.Control 
-              isInvalid={formik.errors.passwordConfirmation}
-              onChange={formik.handleChange}
-              type="password"
-              name="passwordConfirmation" 
-              placeholder="Entrez un nouveau mot de passe" 
+              name="password"
+              placeholder="Entrez votre mot de passe"
               style={{ borderRadius: 50 }} />
           </Form.Group>
 
@@ -163,4 +139,4 @@ const Signup = props => {
   );
 };
 
-export default Signup
+export default Login
