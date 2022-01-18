@@ -11,7 +11,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { default as twitter } from '../images/twitter.svg'
 import { default as twitterBlue } from '../images/twitter-blue.svg'
 
-import SignUp from '../components/SignUp'
+import SignUp from './SignUp'
 
 const Main = styled.main`
     background-color: #fff;
