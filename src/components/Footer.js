@@ -11,6 +11,10 @@ const Text = styled.p`
   font-family: ${(props) =>
     props.type === "name" ? "Twitter bold" : "Twitter"};
   margin: 0;
+
+  @media (max-width: 1280px) {
+    display: none;
+  }
 `;
 
 const Svg = styled.svg`
@@ -20,6 +24,10 @@ const Svg = styled.svg`
 const Right = styled.div`
   display: flex;
   justify-content: flex-end;
+
+  @media (max-width: 1280px) {
+    display: none;
+  }
 `
 
 const Footer = (props) => {

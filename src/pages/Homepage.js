@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Container, Nav, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Sidebar from "../components/Sidebar";
@@ -32,6 +32,18 @@ const FlexFooter = styled.div`
 	@media (max-height: 334px) {
 		display: none;
 	}
+
+  @media (max-width: 1280px) {
+    min-width: 0;
+		min-height: 0;
+		width: 35px;
+		height: 35px;
+		padding: 5px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+    left: 112px;
+  }
 `;
 
 const Homepage = () => {
@@ -39,7 +51,7 @@ const Homepage = () => {
     <Main>
       <Container>
         <Row>
-          <Col>
+          <Col className="none">
             <Sidebar />
 
             <FlexFooter>
