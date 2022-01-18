@@ -12,5 +12,7 @@
   .center {
     align-content: flex-end;
     justify-content: center;
+    border-radius: 2px solid #1DA1F2;
   }
 }
+
