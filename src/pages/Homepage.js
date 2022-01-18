@@ -8,6 +8,7 @@ import { FlexFooter } from "../components/FlexFooter"
 import Sidebar from "../components/Sidebar"
 import Footer from "../components/Footer"
 import SearchBar from "../components/SearchBar"
+import FollowCardSide from "../components/FollowCardSide"
 
 const Main = styled.main`
   font-family: "Twitter";
@@ -34,7 +35,7 @@ const Homepage = () => {
           <Col xs={4}>
             <SearchBar/>
 
-            
+            <FollowCardSide />
           </Col>
         </Row>
       </Container>

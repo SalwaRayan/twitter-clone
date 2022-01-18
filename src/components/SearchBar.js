@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Form = styled.form`
   margin-top: 10px;
   margin-bottom: 25px;
+  margin-left: 15px;
   width: 90%;
   display: flex;
   border-radius: 9999px;
