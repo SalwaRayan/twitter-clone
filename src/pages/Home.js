@@ -3,13 +3,15 @@ import { useState } from 'react';
 
 
 import styled from 'styled-components'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Button, Col, Container, Row } from 'react-bootstrap';
 
 import { default as twitter } from '../images/twitter.svg'
 import { default as twitterBlue } from '../images/twitter-blue.svg'
 
-import LoginModal from '../components/SignInModal'
+import SignUp from '../components/SignUp'
 
 const Main = styled.main`
     background-color: #fff;
@@ -93,7 +95,7 @@ const Home = () => {
                         >
                             Se connecter
                         </Button>
-                        <LoginModal
+                        <SignUp
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                         />
