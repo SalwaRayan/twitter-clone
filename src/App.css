@@ -5,6 +5,9 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  text-align: right;
+  align-self: flex-end;
+  align-content: flex-end;
 }
 
 @media (prefers-reduced-motion: no-preference) {
