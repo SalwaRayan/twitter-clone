@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
@@ -49,10 +49,6 @@ const Text = styled.p`
   &:hover {
     text-decoration: ${(props) => props.type === "name" && "underline"};
   }
-
-  @media (max-width: 1280px) {
-    display: none;
-  }
 `;
 
 const Button = styled.button`
@@ -100,9 +96,32 @@ const BoxImage = styled.div`
   background: black;
   width: 50px;
   height: 50px;
+
+  @media (max-width: 1400px) {
+    height: 45px;
+  }
 `;
 
 const FollowCardSide = () => {
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  const getUsers = async () => {
+    const response = await fetch('http://localhost:5000/users', {
+      credentials: 'include'
+    })
+
+    const data = await response.json()
+
+    if(data) {
+      setUsers(data)
+    }
+  }
+
+
   return (
     <>
       <HeightTitle>

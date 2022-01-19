@@ -59,7 +59,6 @@ const Footer = (props) => {
                 <Svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
-                  class="r-18jsvk2 r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"
                 >
                   <g>
                     <circle cx="5" cy="12" r="2"></circle>

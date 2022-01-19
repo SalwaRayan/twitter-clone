@@ -12,7 +12,7 @@ const FlexFooter = styled.div`
   min-height: 52px;
   cursor: pointer;
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
 	transition-duration: 0.2s;
 
   &:hover {

@@ -15,9 +15,7 @@ const Main = styled.main`
   height: 100%;
 `
 
-
-
-const Homepage = () => {
+const UserList = () => {
   return (
     <Main>
       <Container>
@@ -30,7 +28,7 @@ const Homepage = () => {
             </FlexFooter>
           </Col>
           <Col style={{ backgroundColor: "blue" }}>
-            list tweet
+            list users
           </Col>
           <Col xs={4} className="none-right width-right">
             <SearchBar/>
@@ -40,7 +38,7 @@ const Homepage = () => {
         </Row>
       </Container>
     </Main>
-  )
-}
+  );
+};
 
-export default Homepage
+export default UserList;
