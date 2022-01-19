@@ -3,7 +3,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import GlobalFonts from './fonts/fonts'
 
-import Signup from "./pages/Signup";
+import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Homepage from "./pages/Homepage";
@@ -20,7 +20,7 @@ const App = () => {
       <GlobalFonts />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/:idUser/user" element={<User />} />

@@ -43,7 +43,7 @@ const Title = styled.h2`
 
 const Text = styled.p`
   font-family: ${(props) =>
-    props.type === "name" ? "Twitter bold" : "Twitter"};
+    props.type === "name" ? "Twitter bold" : "TwitterRegular"};
   margin: 0;
 
   &:hover {

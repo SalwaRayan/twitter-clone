@@ -11,7 +11,7 @@ const Form = styled.form`
   border-radius: 9999px;
   background: #f7f9f9;
   padding: 10px 15px;
-  font-family: "Twitter";
+  font-family: "TwitterRegular";
 
   &:active {
     border: 2px solid #1da1f2;

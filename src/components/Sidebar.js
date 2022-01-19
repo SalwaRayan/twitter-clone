@@ -37,7 +37,7 @@ const Hover = styled.div`
   width: 84%;
   padding: 10px;
   min-height: 52px;
-  fontfamily: "Twitter bold";
+  font-family: "Twitter bold";
   cursor: pointer;
   transition-duration: 0.2s;
 
