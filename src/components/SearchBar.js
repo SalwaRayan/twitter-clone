@@ -13,7 +13,7 @@ const Form = styled.form`
   padding: 10px 15px;
   font-family: "TwitterRegular";
 
-  &:active {
+  &:focus {
     border: 2px solid #1da1f2;
     background: #ffffff;
     color: #1da1f2;

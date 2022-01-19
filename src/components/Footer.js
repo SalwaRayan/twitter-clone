@@ -30,7 +30,7 @@ const Right = styled.div`
   }
 `
 
-const Footer = (props) => {
+const Footer = props => {
   return (
     <Container>
       <Row

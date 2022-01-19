@@ -13,7 +13,6 @@ import '../App.css'
 const Main = styled.main`
     background-color: #fff;
     min-width: 100vw;
-    font-family: 'Twitter';
     display: flex;
     align-self: center;
     align-content: center;

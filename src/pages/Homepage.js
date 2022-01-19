@@ -9,9 +9,9 @@ import Sidebar from "../components/Sidebar"
 import Footer from "../components/Footer"
 import SearchBar from "../components/SearchBar"
 import FollowCardSide from "../components/FollowCardSide"
+import ComposeTweetForm from '../components/ComposeTweetForm'
 
 const Main = styled.main`
-  font-family: "Twitter";
   height: 100%;
 `
 
@@ -24,17 +24,15 @@ const Homepage = () => {
         <Row>
           <Col xs={3} className="none width">
             <Sidebar />
-
             <FlexFooter>
               <Footer />
             </FlexFooter>
           </Col>
-          <Col style={{ backgroundColor: "blue" }}>
-            list tweet
+          <Col>
+            <ComposeTweetForm />
           </Col>
           <Col xs={4} className="none-right width-right">
             <SearchBar/>
-
             <FollowCardSide />
           </Col>
         </Row>
