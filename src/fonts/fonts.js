@@ -8,13 +8,12 @@ import ChirpRegularWebWoff2 from './chirp-regular-web.woff2'
 export default createGlobalStyle`
 
     @font-face {
-        font-family: 'Twitter';
-        src: local('Twitter'),
+        font-family: 'Twitter bold';
+        src: local('Twitter bold'), local('TwitterBold'),
         url(${ChirpExtendedHeavyWebWoff2}) format('woff2'),
         url(${ChirpExtendedHeavyWebWoff}) format('woff');
-        /* font-weight: 300; */
-        font-style: normal;
     }
+<<<<<<< HEAD
 
     @font-face {
         font-family: 'TwitterRegular';
@@ -25,3 +24,13 @@ export default createGlobalStyle`
         font-style: normal;
     }
 `
+=======
+    
+    @font-face {
+        font-family: 'Twitter';
+        src: local('Twitter'),
+        url(${ChirpRegularWebWoff2}) format('woff2'),
+        url(${ChirpRegularWebWoff}) format('woff');
+    }
+    `
+>>>>>>> d47a80dbc9b4b6ee9aa3717342326b648fe42a07
