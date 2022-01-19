@@ -20,7 +20,7 @@ const UserList = () => {
     <Main>
       <Container>
         <Row>
-          <Col xs={3} className="none width">
+          <Col className={`none width ${!window.matchMedia("(max-width: 1280px)" && 'col-3' )}`}>
             <Sidebar />
 
             <FlexFooter>
