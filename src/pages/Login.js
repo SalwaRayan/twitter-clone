@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Modal, Button, Form } from "react-bootstrap"
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -9,6 +9,7 @@ import { default as twitterBlue } from '../images/twitter-blue.svg'
 import { useFormik } from "formik"
 import *  as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../contexts/User'
 // import { useNavigate, Link } from "react-router-dom";
 
 
@@ -30,8 +31,9 @@ const H2 = styled.h2`
 `
 
 const Login = props => {
-
   const navigate = useNavigate()
+  const { setUser } = useContext(UserContext)
+
 
   const formik = useFormik({
     initialValues: {
@@ -61,6 +63,9 @@ const Login = props => {
       body: JSON.stringify(values)
     })
 
+    const data = await response.json()
+
+    setUser(data)
 
     if (response.error) {
       alert(response.error)

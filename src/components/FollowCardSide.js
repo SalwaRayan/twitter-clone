@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { UserContext } from "../contexts/User";
 
 const HeightTitle = styled.div`
   border-top-right-radius: 20px;
@@ -96,6 +97,9 @@ const BoxImage = styled.div`
   background: black;
   width: 50px;
   height: 50px;
+  disply: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 1400px) {
     height: 45px;
@@ -103,24 +107,39 @@ const BoxImage = styled.div`
 `;
 
 const FollowCardSide = () => {
-  const [users, setUsers] = useState([])
+  const { user } = useContext(UserContext)
+  const [ users, setUsers ] = useState([]);
 
   useEffect(() => {
-    getUsers()
-  }, [])
+    getUsers();
+  }, []);
 
-  const getUsers = async () => {
-    const response = await fetch('http://localhost:5000/users', {
+  const onHandleClickFollow = async (id) => {
+    const response = await fetch(`http://localhost:5000/follow/${user._id}/${id}`, {
       credentials: 'include'
     })
 
-    const data = await response.json()
+    if (response.error) {
+      alert(response.error)
+      return
+    }
 
-    if(data) {
-      setUsers(data)
+    if (response.status >= 400) {
+      alert(response.statusText)
     }
   }
 
+  const getUsers = async () => {
+    const response = await fetch("http://localhost:5000/users/get/following", {
+      credentials: "include",
+    });
+
+    const data = await response.json();
+
+    if (data) {
+      setUsers(data);
+    }
+  }
 
   return (
     <>
@@ -128,38 +147,24 @@ const FollowCardSide = () => {
         <Title>Suggestions</Title>
       </HeightTitle>
 
-      <UserInfo>
-        <Link className="link-user" to="/">
-          <BoxImage>
-            <Image roundedCircle="true" />
-          </BoxImage>
-          <User>
-            <div>
-              <Text type="name">User</Text>
-              <Text type="username">@User</Text>
-            </div>
-            <div>
-              <Button>Suivre</Button>
-            </div>
-          </User>
-        </Link>
-      </UserInfo>
-      <UserInfo>
-        <Link className="link-user" to="/">
-          <BoxImage>
-            <Image roundedCircle="true" />
-          </BoxImage>
-          <User>
-            <div>
-              <Text type="name">User</Text>
-              <Text type="username">@User</Text>
-            </div>
-            <div>
-              <Button>Suivre</Button>
-            </div>
-          </User>
-        </Link>
-      </UserInfo>
+      {users.map((user) => (
+        <UserInfo>
+          <Link className="link-user" to="/">
+            <BoxImage>
+              <Image roundedCircle="true" src={user.profilePicture} />
+            </BoxImage>
+            <User>
+              <div>
+                <Text type="name">{user.username}</Text>
+                <Text type="username">@{user.username}</Text>
+              </div>
+              <div>
+                <Button>Suivre</Button>
+              </div>
+            </User>
+          </Link>
+        </UserInfo>
+      ))}
 
       <Next>
         <Link className="link" to="">

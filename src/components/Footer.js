@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Col, Row, Image } from "react-bootstrap";
 import styled from "styled-components";
+import { HiOutlineLogout } from "react-icons/hi";
+import { Navigate, useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/User";
 
 const Container = styled.div`
   fontfamily: "Twitter bold";
@@ -17,10 +20,6 @@ const Text = styled.p`
   }
 `;
 
-const Svg = styled.svg`
-  width: 18px;
-`;
-
 const Right = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -28,9 +27,26 @@ const Right = styled.div`
   @media (max-width: 1280px) {
     display: none;
   }
+`;
+
+const Button = styled.button`
+  background: none;
+  border: none;
 `
 
 const Footer = (props) => {
+  const navigate = useNavigate()
+  const { user } = useContext(UserContext)
+
+  const logout = async () => {
+    await fetch('http://localhost:5000/logout', {
+      credentials: 'include',
+      method: 'delete'
+    })
+
+    navigate('/')
+  }
+
   return (
     <Container>
       <Row
@@ -40,7 +56,7 @@ const Footer = (props) => {
         }}
       >
         <Col xs={3}>
-          <Image roundedCircle="true"></Image>
+          <Image roundedCircle="true" src={user.profilePicture}></Image>
         </Col>
         <Col xs={9}>
           <Row
@@ -51,21 +67,16 @@ const Footer = (props) => {
             }}
           >
             <Col>
-              <Text type="name">User</Text>
-              <Text type="username">@User</Text>
+              <Text type="name">{user.username}</Text>
+              <Text type="username">@{user.username}</Text>
             </Col>
             <Col>
               <Right>
-                <Svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+                <Button
+                  onClick={logout}
                 >
-                  <g>
-                    <circle cx="5" cy="12" r="2"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                    <circle cx="19" cy="12" r="2"></circle>
-                  </g>
-                </Svg>
+                  <HiOutlineLogout style={{ fontSize: 25 }} />
+                </Button>
               </Right>
             </Col>
           </Row>
