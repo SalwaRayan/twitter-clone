@@ -11,7 +11,6 @@ import SearchBar from "../components/SearchBar";
 import FollowCardSide from "../components/FollowCardSide";
 
 const Main = styled.main`
-  font-family: "TwitterRegular";
   height: 100%;
 `;
 
@@ -29,9 +28,11 @@ const Homepage = () => {
               <Footer />
             </FlexFooter>
           </Col>
-          <Col style={{ backgroundColor: "blue" }}>list tweet</Col>
+          <Col>
+            <ComposeTweetForm />
+          </Col>
           <Col xs={4} className="none-right width-right">
-            <SearchBar />
+            <SearchBar/>
             <FollowCardSide />
           </Col>
         </Row>

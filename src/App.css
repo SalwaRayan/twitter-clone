@@ -1,3 +1,23 @@
+*,
+body {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  outline: none;
+  outline-style: none;
+}
+
+.p-sticky {
+  position: sticky;
+}
+
+html {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 .div-twt-one {
   min-height: 45vw;
   -webkit-box-pack: center;
@@ -15,7 +35,7 @@
 
 .link {
   text-decoration: none;
-  color: #1DA1F2;
+  color: #1da1f2;
   margin-left: 10px;
   width: 100%;
   height: 100%;
@@ -46,15 +66,14 @@
 }
 
 @media (max-width: 488px) {
-  .none{ 
+  .none {
     display: none;
   }
-
 }
 
 @media (max-width: 1005px) {
   .none-right {
-    display: none
+    display: none;
   }
 }
 
@@ -71,7 +90,7 @@
     flex: 1;
     width: 100vw;
     height: 100vh;
-    justify-content: center;  
+    justify-content: center;
     margin: 120px auto;
   }
   .twitter-logo {
@@ -92,7 +111,7 @@
 @media (max-width: 1280px) {
   .margin {
     margin: 0;
-  } 
+  }
 
   .col-3 {
     width: 68px;
@@ -101,11 +120,53 @@
   .none-big {
     display: none;
   }
-  
+
   .center {
     align-content: center;
     justify-content: center;
-    border-radius: 2px solid #1DA1F2;
+    border-radius: 2px solid #1da1f2;
   }
+}
+
+.form-container-mx-w-600 {
+  max-width: 600px;
+  margin-right: 0;
+  margin-left: 0;
+  z-index: 1;
+}
+
+.compose-tweet-form {
+  border: 0;
+  border-radius: 0;
+  padding-left: 70px;
+}
+
+.input-text {
+  padding-left: 40px;
+  border-style: none;
+  font-size: 18px;
+  outline: none !important;
+}
+
+input[type=text]:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: 0 0 0 #ddd;
+  outline: none !important;
+  border-top-style: hidden;
+  outline-width: 0;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-style: none;
+  pointer-events: none;
+}
+
+input[type=text]:not(:focus) {
+  box-shadow: 0 0 0 #ddd;
+  outline: none !important;
+  border-top-style: hidden;
+  outline-width: 0;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-style: none;
 }
 

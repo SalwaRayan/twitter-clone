@@ -14,7 +14,10 @@ import Login from "./Login";
 const Main = styled.main`
     background-color: #fff;
     min-width: 100vw;
+<<<<<<< HEAD
     font-family: 'Twitter bold';
+=======
+>>>>>>> 362e489db9b0b864ed75f07128ed13a5521bf495
     display: flex;
     align-self: center;
     align-content: center;
