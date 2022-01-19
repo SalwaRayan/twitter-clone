@@ -94,7 +94,7 @@ const User = styled.div`
 const BoxImage = styled.div`
   margin: 4px;
   border-radius: 9999px;
-  background: black;
+  // background: black;
   width: 50px;
   height: 50px;
   disply: flex;
@@ -159,7 +159,7 @@ const FollowCardSide = () => {
                 <Text type="username">@{user.username}</Text>
               </div>
               <div>
-                <Button>Suivre</Button>
+                <Button onClick={() => onHandleClickFollow(user._id)}>Suivre</Button>
               </div>
             </User>
           </Link>
