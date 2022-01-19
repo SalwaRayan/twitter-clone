@@ -11,7 +11,7 @@ import SearchBar from "../components/SearchBar"
 import FollowCardSide from "../components/FollowCardSide"
 
 const Main = styled.main`
-  font-family: "Twitter";
+  font-family: "TwitterRegular";
   height: 100%;
 `
 

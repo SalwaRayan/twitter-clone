@@ -8,6 +8,7 @@ import { default as twitterBlue } from '../images/twitter-blue.svg'
 
 import { useFormik } from "formik"
 import *  as Yup from 'yup'
+import { useNavigate } from 'react-router-dom'
 // import { useNavigate, Link } from "react-router-dom";
 
 
@@ -22,7 +23,7 @@ const ImgSvgModal = styled.img`
 `
 
 const H2 = styled.h2`
-  font-family: 'Twitter';
+  font-family: 'Twitter bold';
   font-size: 35px;
   font-weight: 700;
   margin-bottom: 30px;
@@ -30,12 +31,12 @@ const H2 = styled.h2`
 
 const Login = props => {
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
-      username: "Leslie",
-      password: "hellohello",
+      email: "",
+      password: "",
     },
 
     onSubmit: values => {
@@ -43,7 +44,7 @@ const Login = props => {
     },
     validateOnChange: false,
     validationSchema: Yup.object({
-      username: Yup.string().required("Username is required"),
+      email: Yup.string().required("Email is required"),
       password: Yup.string().required("Password is required")
     })
   })
@@ -69,8 +70,8 @@ const Login = props => {
     if (response.status >= 400) {
       alert(response.statusText)
     } else {
-      console.log(response)
-      //navigate('')
+      // console.log(response)
+      navigate('/homepage')
     }
 
     //const togglePasswordVisible = () => {
@@ -81,7 +82,7 @@ const Login = props => {
 
   return (
     <Modal
-      show={props.showModeLogin}
+      show={props.show}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -96,23 +97,23 @@ const Login = props => {
       <Modal.Body>
         <H2>Connectez-vous à Twitter</H2>
 
-        <Form>
+        <Form  onSubmit={formik.handleSubmit} >
 
-          <Form.Group onSubmit={formik.handleSubmit} className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Addresse e-mail</Form.Label>
             <Form.Control
               isInvalid={formik.errors.username}
               onChange={formik.handleChange}
-              type="text"
-              name="username"
-              plac eholder="Entrez votre username"
+              type="email"
+              name="email"
+              placeholder="Entrez votre username"
               style={{ borderRadius: 50 }}
             />
             <Form.Text className="text-muted">
             </Form.Text>
           </Form.Group>
 
-          <Form.Group onSubmit={formik.handleSubmit} className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Mot de passe</Form.Label>
             <Form.Control
               isInvalid={formik.errors.password}
@@ -123,7 +124,7 @@ const Login = props => {
               style={{ borderRadius: 50 }} />
           </Form.Group>
 
-          <Button variant="dark" type="submit" style={{ borderRadius: 50, marginTop: 20, paddingLeft: 30, paddingRight: 30, fontFamily: 'Twitter' }}>
+          <Button variant="dark" type="submit" style={{ borderRadius: 50, marginTop: 20, paddingLeft: 30, paddingRight: 30, fontFamily: 'Twitter bold' }}>
             Suivant
           </Button>
 
@@ -132,7 +133,7 @@ const Login = props => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={props.onHide} style={{ borderRadius: 50, paddingLeft: 30, paddingRight: 30, fontFamily: 'Twitter' }}>Annuler</Button>
+        <Button onClick={props.onHide} style={{ borderRadius: 50, paddingLeft: 30, paddingRight: 30, fontFamily: 'Twitter bold' }}>Annuler</Button>
       </Modal.Footer>
 
     </Modal >

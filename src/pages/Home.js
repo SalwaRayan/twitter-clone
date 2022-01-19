@@ -4,16 +4,17 @@ import styled from 'styled-components'
 import { default as twitter } from '../images/twitter.svg'
 import { default as twitterBlue } from '../images/twitter-blue.svg'
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import SignUp from './Login'
+import SignUp from './SignUp'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import '../App.css'
+import Login from "./Login";
 
 
 const Main = styled.main`
     background-color: #fff;
     min-width: 100vw;
-    font-family: 'Twitter';
+    font-family: 'Twitter bold';
     display: flex;
     align-self: center;
     align-content: center;
@@ -64,7 +65,8 @@ const H2 = styled.h2`
 `
 
 const Home = () => {
-    const [modalShow, setModalShow] = useState(false);
+    const [modalShowSignup, setModalShowSignup] = useState(false);
+    const [modalShowLogin, setModalShowLogin] = useState(false);
 
     return (
         <Main>
@@ -86,19 +88,24 @@ const Home = () => {
                     </Container>
                     <Container>
                         <Button
-                            variant="primary"
                             style={{
                                 fontSize: 22,
                                 marginLeft: 100,
                                 marginTop: 40,
                                 borderRadius: 50, 
                                 paddingLeft: 60,
-                                paddingRight: 60
+                                paddingRight: 60,
+                                borderColor: "#1DA1f2",
+                                background: "#1DA1F2"
                             }}
-                            onClick={() => setModalShow(true)}
+                            onClick={() => setModalShowSignup(true)}
                         >
                             S'inscrire
                         </Button>
+                        <SignUp
+                            show={modalShowSignup}
+                            onHide={() => setModalShowSignup  (false)}
+                        />
 
                         <Link to="/login" style={{ color: "black", textDecoration: "none", marginLeft: 100, }}>
                             <h3 style={{ marginTop: 70 }} mt={2} >
@@ -115,12 +122,13 @@ const Home = () => {
                                 paddingLeft: 47,
                                 paddingRight: 47
                             }}
+                            onClick={() => setModalShowLogin(true)}
                         >
                             Se connecter
                         </Button>
-                        <SignUp
-                            show={modalShow}
-                            onHide={() => setModalShow(false)}
+                         <Login
+                            show={modalShowLogin}
+                            onHide={() => setModalShowLogin(false)}
                         />
                     </Container>
                 </Col>

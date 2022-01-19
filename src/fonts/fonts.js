@@ -13,7 +13,6 @@ export default createGlobalStyle`
         url(${ChirpExtendedHeavyWebWoff2}) format('woff2'),
         url(${ChirpExtendedHeavyWebWoff}) format('woff');
     }
-<<<<<<< HEAD
 
     @font-face {
         font-family: 'TwitterRegular';
@@ -24,13 +23,3 @@ export default createGlobalStyle`
         font-style: normal;
     }
 `
-=======
-    
-    @font-face {
-        font-family: 'Twitter';
-        src: local('Twitter'),
-        url(${ChirpRegularWebWoff2}) format('woff2'),
-        url(${ChirpRegularWebWoff}) format('woff');
-    }
-    `
->>>>>>> d47a80dbc9b4b6ee9aa3717342326b648fe42a07
