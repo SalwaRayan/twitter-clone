@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Form } from "react-bootstrap"
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = styled.div`
@@ -21,7 +22,7 @@ const ContainerTweetView = styled.div`
 `
 
 const H4 = styled.h4`
-    margin: 30px;
+    margin: 20px;
 `
 
 const ComposeTweetForm = () => {
@@ -39,7 +40,6 @@ const ComposeTweetForm = () => {
     }
 
     return (
-
         <ContainerTweetView>
 
         <Header>
@@ -48,17 +48,20 @@ const ComposeTweetForm = () => {
             <Form className="compose-tweet-form" onSubmit={handleTweetSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Control
-                        className="input-text"
-                        value={tweetValueEdit}
-                        type="text"
-                        placeholder="Quoi de neuf ?"
-                        as="input"
-                        rows={3}
-                        onChange={handleChangeTweetValue}
+                            className="input-text"
+                            value={tweetValueEdit}
+                            type="text"
+                            placeholder="Quoi de neuf ?"
+                            as="input"
+                            rows={3}
+                            onChange={handleChangeTweetValue}
                         />
                 </Form.Group>
-                
-                <Button className="tweet-btn">Tweet</Button>
+                <Link>
+                    <div style={{ borderRadius: 100 }}>
+                    </div>      
+                </Link>
+                <Button style={{ position: "relative", right: -300, borderRadius: 50, paddingLeft: 27, paddingRight: 27 }}>Tweeter</Button>
             </Form>
         </ContainerTweetView>
     );

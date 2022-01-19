@@ -138,17 +138,7 @@ html {
 .compose-tweet-form {
   border: 0;
   border-radius: 0;
-}
-
-.tweet-btn {
-  font-family: "Twitter Regular";
-  font-size: 18px;
-  outline-style: none;
-  min-width: 60px;
-  min-height: 60px;
-  border-radius: 50px;
-  position: relative;
-
+  padding-left: 70px;
 }
 
 .input-text {
