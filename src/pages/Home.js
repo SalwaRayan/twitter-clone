@@ -12,7 +12,7 @@ import '../App.css'
 
 const Main = styled.main`
     background-color: #fff;
-    width: 100%;
+    min-width: 100vw;
     font-family: 'Twitter';
     display: flex;
     align-self: center;
@@ -39,10 +39,10 @@ const ImgSvg = styled.img`
     width: 19em;
 `
 
-const ImgSvg2 = styled.img`
-    width: 3em;
+const TwitterLogoBlue = styled.img`
+    margin-top: 25px;
+    width: 30px;
     fill: #1DA1F2;
-    margin: 40px 100px;
 `
 
 const ContainerBtn = styled.div`
@@ -60,10 +60,7 @@ const H1 = styled.h1`
 `
 
 const H2 = styled.h2`
-    font-size: 30px; 
-    margin-top: 25px; 
-    margin-bottom: 45px; 
-    /* margin-left: 100px; */
+    font-size: 25px; 
 `
 
 const Home = () => {
@@ -74,27 +71,29 @@ const Home = () => {
 
             <Row className="row-twt-hm">
 
-                <Col className="div-twt-two" lg={6}>
+                <Col className="div-twt-two" lg={6} xs={0}>
                     <ContainerImg>
                         <BackgroundImg className="twitter-logo" src="http://localhost:5000/17-01-2022-12-29-45-twitter-bckg-home.png" />
                         <ImgSvg src={twitter} />
                     </ContainerImg>
                 </Col>
 
-                <Col className="div-twt-one" lg={6}>
+                <Col className="div-twt-one" lg={6} xs={12}>
                     <Container>
-                        <ImgSvg2 src={twitterBlue} />
+                        <TwitterLogoBlue src={twitterBlue} />
                         <H1>Ça se passe <br /> maintenant</H1>
                         <H2>Rejoignez Twitter dès aujourd'hui.</H2>
                     </Container>
-                    <ContainerBtn>
+                    <Container>
                         <Button
                             variant="primary"
                             style={{
                                 fontSize: 22,
                                 marginLeft: 100,
                                 marginTop: 40,
-                                borderRadius: 50
+                                borderRadius: 50, 
+                                paddingLeft: 60,
+                                paddingRight: 60
                             }}
                             onClick={() => setModalShow(true)}
                         >
@@ -113,6 +112,8 @@ const Home = () => {
                                 marginLeft: 100,
                                 marginTop: 2,
                                 borderRadius: 50,
+                                paddingLeft: 47,
+                                paddingRight: 47
                             }}
                         >
                             Se connecter
@@ -121,7 +122,7 @@ const Home = () => {
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                         />
-                    </ContainerBtn>
+                    </Container>
                 </Col>
             </Row>
         </Main>
