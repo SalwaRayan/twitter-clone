@@ -11,7 +11,6 @@ const Form = styled.form`
   border-radius: 9999px;
   background: #f7f9f9;
   padding: 10px 15px;
-  font-family: "TwitterRegular";
 
   &:focus {
     border: 2px solid #1da1f2;
@@ -24,6 +23,7 @@ const Input = styled.input`
   border: none;
   background: none;
   outline: none !important;
+  margin-left: 10px;
   width: 100%;
 `;
 

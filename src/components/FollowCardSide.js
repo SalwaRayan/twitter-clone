@@ -44,7 +44,7 @@ const Title = styled.h2`
 
 const Text = styled.p`
   font-family: ${(props) =>
-    props.type === "name" ? "Twitter bold" : "TwitterRegular"};
+    props.type === "name" ? "Twitter bold" : "Twitter Regular"};
   margin: 0;
 
   &:hover {
@@ -97,9 +97,10 @@ const BoxImage = styled.div`
   // background: black;
   width: 50px;
   height: 50px;
-  disply: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   @media (max-width: 1400px) {
     height: 45px;
@@ -107,27 +108,34 @@ const BoxImage = styled.div`
 `;
 
 const FollowCardSide = () => {
-  const { user } = useContext(UserContext)
-  const [ users, setUsers ] = useState([]);
+  const { user } = useContext(UserContext);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     getUsers();
   }, []);
 
   const onHandleClickFollow = async (id) => {
-    const response = await fetch(`http://localhost:5000/follow/${user._id}/${id}`, {
-      credentials: 'include'
-    })
+    const response = await fetch(
+      `http://localhost:5000/follow/${user._id}/${id}`,
+      {
+        credentials: "include",
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
 
     if (response.error) {
-      alert(response.error)
-      return
+      alert(response.error);
+      return;
     }
 
     if (response.status >= 400) {
-      alert(response.statusText)
+      alert(response.statusText);
     }
-  }
+  };
 
   const getUsers = async () => {
     const response = await fetch("http://localhost:5000/users/get/following", {
@@ -139,7 +147,7 @@ const FollowCardSide = () => {
     if (data) {
       setUsers(data);
     }
-  }
+  };
 
   return (
     <>
@@ -147,27 +155,30 @@ const FollowCardSide = () => {
         <Title>Suggestions</Title>
       </HeightTitle>
 
-      {users.map((user) => (
+      {users.map((userElement) => (
         <UserInfo>
-          <Link className="link-user" to="/">
             <BoxImage>
-              <Image roundedCircle="true" src={user.profilePicture} />
+              <Image roundedCircle="true" src={userElement.profilePicture} />
             </BoxImage>
             <User>
+              <Link to={`/${userElement.username}`} className="link">
+                <Text type="name">{userElement.username}</Text>
+                <Text type="username">@{userElement.username}</Text>
+              </Link>
               <div>
-                <Text type="name">{user.username}</Text>
-                <Text type="username">@{user.username}</Text>
-              </div>
-              <div>
-                <Button onClick={() => onHandleClickFollow(user._id)}>Suivre</Button>
+                <Button onClick={() => onHandleClickFollow(userElement._id)}>
+                  {/* {user.following.find((userFollow) =>
+                    userFollow === userElement._id ? "Abonné" : "Suivre"
+                  )} */}
+                  Suivre
+                </Button>
               </div>
             </User>
-          </Link>
         </UserInfo>
       ))}
 
       <Next>
-        <Link className="link" to="">
+        <Link className="link-blue" to="/users">
           Voir plus
         </Link>
       </Next>

@@ -1,70 +1,85 @@
-import React, { useState } from 'react'
-import { Button, Form } from "react-bootstrap"
+import React, { useContext, useState } from "react";
+import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { UserContext } from "../contexts/User";
+import User from "../pages/User";
 
-const Header = styled.div`
-    font-family: "Twitter Bold";
-    height: 73px;
-    position: sticky;
-    backface-visibility: hidden;
-    z-index: 3;
-    display: flex;
-    flex-direction: row;
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const Button = styled.button`
+  background-color: #1da1f2;
+  padding: 5px;
+  width: 120px;
+  border: none;
+  border-radius: 9999px;
+  color: white;
+  font-family: 'twitter bold';
+  margin-bottom: 10px;
+  margin-right: 20px;
+  right: -395px;
+  align-self: flex-end;
 `
 
-const ContainerTweetView = styled.div`
-    max-width: 600px;    
-    height: 100vh;
-    border-left: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
-    z-index: 5;
-`
+const ComposeTweetForm = (props) => {
+  const { user } = useContext(UserContext);
+  const [ tweet, setTweet ] = useState({})
 
-const H4 = styled.h4`
-    margin: 20px;
-`
+  const formik = useFormik({
+    initialValues: {
+      content: "",
+    },
+    onSubmit: (values) => {
+      postTweet(values)
+      props.getTweets()
+      formik.resetForm()
+    },
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      content: Yup.string().required("tweet needs a content to be posted")
+    }),
+  });
 
-const ComposeTweetForm = () => {
+  const postTweet = async (values) => {
+    const response = await fetch(`http://localhost:5000/tweets/${user._id}`, {
+        credentials: 'include',
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+    })
 
-    const [tweetValueEdit, setTweetValueEdit] = useState('')
+    const data = await response.json()
 
-    const handleChangeTweetValue = e => {
-        const { value } = e.target
-        setTweetValueEdit(value)
-    }
+    setTweet(data)    
+  }
 
-    const handleTweetSubmit = e => {
-        e.preventDefault()
-        setTweetValueEdit('')
-    }
-
-    return (
-        <ContainerTweetView>
-
-        <Header>
-            <H4>Accueil</H4>
-        </Header>
-            <Form className="compose-tweet-form" onSubmit={handleTweetSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Control
-                            className="input-text"
-                            value={tweetValueEdit}
-                            type="text"
-                            placeholder="Quoi de neuf ?"
-                            as="input"
-                            rows={3}
-                            onChange={handleChangeTweetValue}
-                        />
-                </Form.Group>
-                <Link>
-                    <div style={{ borderRadius: 100 }}>
-                    </div>      
-                </Link>
-                <Button style={{ position: "relative", right: -300, borderRadius: 50, paddingLeft: 27, paddingRight: 27 }}>Tweeter</Button>
-            </Form>
-        </ContainerTweetView>
-    );
+  return (
+      <Form className="compose-tweet-form bottom-right" onSubmit={formik.handleSubmit} style={{ borderBottom: '1px solid lightgrey' }}>
+        <Form.Group className="mb-3">
+          <Form.Control
+            name="content"
+            className="input-text"
+            value={formik.values.content}
+            type="text"
+            placeholder="Quoi de neuf ?"
+            as="input"
+            rows={3}
+            onChange={formik.handleChange}
+          />
+        </Form.Group>
+        <Link to={`/${user.username}`}>
+          <div style={{ borderRadius: 100 }}></div>
+        </Link>
+        <Button
+          type="submit"
+        >
+          Tweeter
+        </Button>
+      </Form>
+  );
 };
 
-export default ComposeTweetForm
+export default ComposeTweetForm;

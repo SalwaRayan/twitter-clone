@@ -32,7 +32,7 @@ const H2 = styled.h2`
 
 const Login = props => {
   const navigate = useNavigate()
-  const { setUser } = useContext(UserContext)
+  const { setUser, setConnected } = useContext(UserContext)
 
 
   const formik = useFormik({
@@ -66,6 +66,7 @@ const Login = props => {
     const data = await response.json()
 
     setUser(data)
+    setConnected(true)
 
     if (response.error) {
       alert(response.error)

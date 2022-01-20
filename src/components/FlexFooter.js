@@ -4,7 +4,7 @@ import styled from "styled-components";;
 const FlexFooter = styled.div`
   border-radius: 9999px;
   border: none;
-  width: 255px;
+  width: 266px;
   margin-top: 4px;
   margin-bottom: 4px;
   padding: 10px;

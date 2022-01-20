@@ -7,7 +7,10 @@ body {
   box-sizing: border-box;
   outline: none;
   outline-style: none;
+  font-family: 'Twitter Regular';
 }
+
+
 
 .p-sticky {
   position: sticky;
@@ -33,7 +36,7 @@ html {
   z-index: 35;
 }
 
-.link {
+.link-blue {
   text-decoration: none;
   color: #1da1f2;
   margin-left: 10px;
@@ -41,8 +44,21 @@ html {
   height: 100%;
 }
 
-.link:hover {
+.link-blue:hover {
   color: #1a8cd8;
+}
+
+.link {
+  text-decoration: none;
+  color: #000000;
+  /* margin-left: 10px; */
+  width: 100%;
+  height: fit-content;
+  font-family: 'Twitter Regular';
+}
+
+.link:hover{
+  color: #272c30;
 }
 
 .link-user {
@@ -65,6 +81,15 @@ html {
   background-color: #e7e7e8;
 }
 
+.bottom-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-right:nth-last-child() {
+  align-self: flex-end;
+}
+
 @media (max-width: 488px) {
   .none {
     display: none;
@@ -85,6 +110,7 @@ html {
     align-self: center;
     align-items: center;
     margin: 30px auto;
+    background: #fccbcb;
   }
   .div-twt-one {
     flex: 1;

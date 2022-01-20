@@ -2,17 +2,17 @@ import React, { useContext, useEffect } from "react";
 import { Col, Row, Image } from "react-bootstrap";
 import styled from "styled-components";
 import { HiOutlineLogout } from "react-icons/hi";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../contexts/User";
 
 const Container = styled.div`
-  fontfamily: "Twitter bold";
+  font-family: "Twitter Bold";
   font-size: 15px;
 `;
 
 const Text = styled.p`
   font-family: ${(props) =>
-    props.type === "name" ? "Twitter bold" : "TwitterRegular"};
+    props.type === "name" ? "Twitter Bold" : "Twitter Regular"};
   margin: 0;
 
   @media (max-width: 1280px) {
@@ -32,20 +32,21 @@ const Right = styled.div`
 const Button = styled.button`
   background: none;
   border: none;
-`
+`;
 
-const Footer = (props) => {
-  const navigate = useNavigate()
-  const { user } = useContext(UserContext)
+const Footer = () => {
+  const navigate = useNavigate();
+  const { user, setConnected } = useContext(UserContext);
 
   const logout = async () => {
-    await fetch('http://localhost:5000/logout', {
-      credentials: 'include',
-      method: 'delete'
-    })
+    await fetch("http://localhost:5000/logout", {
+      credentials: "include",
+      method: "delete",
+    });
 
-    navigate('/')
-  }
+    setConnected(false)
+    navigate("/");
+  };
 
   return (
     <Container>
@@ -67,14 +68,14 @@ const Footer = (props) => {
             }}
           >
             <Col>
-              <Text type="name">{user.username}</Text>
-              <Text type="username">@{user.username}</Text>
+              <Link to={`/${user.username}`} className='link' style={{ height: 0, margin: 0, padding: 0  }}>
+                <Text type="name">{user.username}</Text>
+                <Text type="username">@{user.username}</Text>
+              </Link>
             </Col>
             <Col>
               <Right>
-                <Button
-                  onClick={logout}
-                >
+                <Button onClick={logout}>
                   <HiOutlineLogout style={{ fontSize: 25 }} />
                 </Button>
               </Right>
