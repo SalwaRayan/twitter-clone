@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Nav, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
+
+import { UserContext } from "../contexts/User"
 
 const Svg = styled.svg`
   width: 25px;
-`;
+`
+
 const SvgLogo = styled.svg`
   width: 50px;
   border-radius: 9999px;
@@ -87,6 +91,9 @@ const SvgTweet = styled.svg`
 `;
 
 const Sidebar = (props) => {
+
+  const { user } = useContext(UserContext)
+
   return (
     <>
       <Nav defaultActiveKey="/home" className="flex-column center">
@@ -146,7 +153,9 @@ const Sidebar = (props) => {
                     </Svg>
                   </Col>
                   <Col xs={12} md={10} className="none-big">
-                    <Text>Profil</Text>
+                    <Link to={`/${user.username}`}>
+                      <Text>Profil</Text>
+                    </Link>
                   </Col>
                 </Row>
               </Hover>

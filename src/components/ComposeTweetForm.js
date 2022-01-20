@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Form } from "react-bootstrap"
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from "react-router-dom"
+import styled from "styled-components"
+
+import { UserContext } from "../contexts/User"
 
 const Header = styled.div`
     font-family: "Twitter Bold";
@@ -26,6 +28,8 @@ const H4 = styled.h4`
 `
 
 const ComposeTweetForm = () => {
+
+    const { user } = useContext(UserContext)
 
     const [tweetValueEdit, setTweetValueEdit] = useState('')
 
@@ -57,7 +61,7 @@ const ComposeTweetForm = () => {
                             onChange={handleChangeTweetValue}
                         />
                 </Form.Group>
-                <Link>
+                <Link to={`/${user.username}`}>
                     <div style={{ borderRadius: 100 }}>
                     </div>      
                 </Link>

@@ -170,3 +170,11 @@ input[type=text]:not(:focus) {
   border-style: none;
 }
 
+.container-profile-page {
+  background: #ffffff;
+  border-left: 0.5px solid rgba(211, 211, 211, 0.277);
+  border-right: 0.5px solid rgba(211, 211, 211, 0.277);
+  border-bottom: 0.5px solid rgba(211, 211, 211, 0.277);
+}
+
+
