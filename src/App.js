@@ -32,7 +32,7 @@ const App = () => {
         </Routes>
       </UserContextProvider>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default App;
+export default App
