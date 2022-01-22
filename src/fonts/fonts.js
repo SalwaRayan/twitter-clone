@@ -40,7 +40,7 @@ export default createGlobalStyle`
 
     @font-face {
         font-family: 'Twitter Extended Heavy';
-        src: local('Twitter Heavy'),
+        src: local('Twitter Extended Heavy'),
         url(${ChirpExtendedHeavyWebWoff2}) format('woff2'),
         url(${ChirpExtendedHeavyWebWoff}) format('woff');
     }

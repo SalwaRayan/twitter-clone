@@ -41,4 +41,4 @@ const Follow = () => {
   );
 };
 
-export default Follow;
+export default Follow

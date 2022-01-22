@@ -92,9 +92,16 @@ const Login = props => {
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      style={{ paddingLeft: 50 }}
+      style={{ paddingLeft: 50, borderRadius: 60 }}
+      
     >
-      <Modal.Header style={{ paddingBottom: 30, paddingTop: 30, display: "flex", justifyContent: "center" }}>
+      <Modal.Header 
+        style={{ 
+          paddingBottom: 30, 
+          paddingTop: 30,
+          display: "flex", 
+          justifyContent: "center" 
+        }}>
         <Modal.Title id="contained-modal-title-vcenter">
           <ImgSvgModal src={twitterBlue} />
         </Modal.Title>
