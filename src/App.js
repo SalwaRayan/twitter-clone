@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GlobalFonts from "./fonts/fonts";
 import { UserContextProvider } from "./contexts/User";
+
+import GlobalFonts from "./fonts/fonts";
 
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";

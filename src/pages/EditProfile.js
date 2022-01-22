@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { Modal, Button, Form } from "react-bootstrap"
+import { Modal, Button } from "react-bootstrap"
 import { useFormik } from "formik"
 
 import { UserContext } from "../contexts/User"
@@ -12,38 +12,23 @@ import '../App.css'
 import styled from "styled-components"
 
 const Input = styled.input`
-  font-size: 34px;
-  display: block;
+  padding: 15px;
+  font-size: 30px;
   width: 100%;
   margin-bottom: 50px;
-  padding-top: $width/15;
-  border: none;
-  border-radius: 0; // For iOS
-  // border-bottom: solid $width/150 rgba(white, .5);
+  background-color: #ECE9E8;
+  border-radius: 3px;
+  border: 0.5px solid lightgray;
   color: black;
-  background: $main-color;
-  font-size: $width/15;
-  transition: .3s ease;
-  &:valid {
-    // border-bottom-color: rgba(white, .5);
-    ~label {
-      top: 0;
-      font: 700 $width/25 Roboto;
-      color: rgba(white, .5);
-    }
-  }
-  &:focus {
-    outline: none;
-    // border-bottom-color: $secondary-color;
-    ~label {
-      top: 0;
-      font: 700 $width/25 Roboto;
-      color: $secondary-color;
-    }    
-    ~ .bar:before {
-    transform: translateX(0);
-    }
-  }
+  text-align: left;
+  display: block;
+`
+
+const EditForm = styled.form`
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px;
 `
 
 const UpdateProfile = props => {
@@ -74,27 +59,29 @@ const UpdateProfile = props => {
 
         const data = await response.json()
         setUser(data)
-        console.log(data)
+        console.log('62', data)
     }
 
     console.log(user)
 
     return (
+
         <Modal
-            className="" 
             show={props.show}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             style={{ background: "transparent", fontFamily: "Twitter Heavy" }}
         >
+
             <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Éditer le profil
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={formik.handleSubmit}>
+
+                <EditForm onSubmit={formik.handleSubmit}>
                     <Input
                         type='text'
                         name="username"
@@ -113,19 +100,21 @@ const UpdateProfile = props => {
                         value={formik.values.description}
                         onChange={formik.handleChange}
                     />
-                </form>
+                </EditForm>
                 <button
                     type="submit"
                 >
                     Sauvegarder
                 </button>
             </Modal.Body>
+
             <Modal.Footer>
                 <Button 
                     onClick={props.onHide}>Fermer la fenêtre
                 </Button>
             </Modal.Footer>
         </Modal>
+        
     )
 }
 

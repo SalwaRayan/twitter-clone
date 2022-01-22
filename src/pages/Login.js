@@ -46,8 +46,8 @@ const Login = props => {
     },
     validateOnChange: false,
     validationSchema: Yup.object({
-      email: Yup.string().required("Email is required"),
-      password: Yup.string().required("Password is required")
+      email: Yup.string().required("Adresse email requise"),
+      password: Yup.string().required("Mot de passe requis")
     })
   })
 
