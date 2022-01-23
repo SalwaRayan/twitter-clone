@@ -108,7 +108,7 @@ const BoxImage = styled.div`
 `;
 
 const FollowCardSide = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser, connected } = useContext(UserContext);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -120,10 +120,10 @@ const FollowCardSide = () => {
       `http://localhost:5000/follow/${user._id}/${id}`,
       {
         credentials: "include",
-        method: 'post',
+        method: "post",
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
 
@@ -135,6 +135,11 @@ const FollowCardSide = () => {
     if (response.status >= 400) {
       alert(response.statusText);
     }
+
+    const data = await response.json();
+
+    setUser(data);
+    // setFollow(follow)
   };
 
   const getUsers = async () => {
@@ -157,23 +162,36 @@ const FollowCardSide = () => {
 
       {users.map((userElement) => (
         <UserInfo>
-            <BoxImage>
-              <Image roundedCircle="true" src={userElement.profilePicture} />
-            </BoxImage>
-            <User>
-              <Link to={`/${userElement.username}`} className="link">
-                <Text type="name">{userElement.username}</Text>
-                <Text type="username">@{userElement.username}</Text>
-              </Link>
-              <div>
-                <Button onClick={() => onHandleClickFollow(userElement._id)}>
-                  {/* {user.following.find((userFollow) =>
-                    userFollow === userElement._id ? "Abonné" : "Suivre"
-                  )} */}
-                  Suivre
-                </Button>
-              </div>
-            </User>
+          <BoxImage>
+            <Image
+              roundedCircle="true"
+              style={{ width: 40 }}
+              src={
+                userElement.profilePicture === ""
+                  ? `http://localhost:5000/22-01-2022-03-10-18-default_profile_400x400.png`
+                  : `${userElement.profilePicture}`
+              }
+            />
+          </BoxImage>
+          <User>
+            <Link to={`/${userElement.username}`} className="link">
+              <Text type="name">{userElement.username}</Text>
+              <Text type="username">@{userElement.username}</Text>
+            </Link>
+            <div>
+              {connected ? (
+                user.following.includes(userElement._id) ? (
+                  <Button onClick={() => onHandleClickFollow(userElement._id)}>
+                    Abonné
+                  </Button>
+                ) : (
+                  <Button onClick={() => onHandleClickFollow(userElement._id)}>
+                    Suivi
+                  </Button>
+                )
+              ) : null}
+            </div>
+          </User>
         </UserInfo>
       ))}
 

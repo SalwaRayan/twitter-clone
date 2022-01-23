@@ -3,7 +3,6 @@ import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/User";
-import User from "../pages/User";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";

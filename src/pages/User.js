@@ -20,19 +20,22 @@ const Main = styled.main`
 `
 
 const User = () => {
-
-  const { user } = useContext(UserContext)
+  
+  const { user, connected } = useContext(UserContext)
 
   return (
     <Main>
       <Container>
         <Row>
 
-          <Col xs={3} className="none width">
+        <Col xs={3} className="none width">
             <Sidebar />
-            <FlexFooter>
-              <Footer />
-            </FlexFooter>
+
+            {connected && (
+              <FlexFooter>
+                <Footer />
+              </FlexFooter>
+            )}
           </Col>
 
 
@@ -53,10 +56,9 @@ const User = () => {
               <p style={{ marginBlock: -4, fontSize: 20, fontFamily: "Twitter Regular", color: "grey" }}>@{user.username}</p>
             </div>
           </Col>
-          <Col xs={4} className="none-right width-right">
+          <Col xs={4} className="none-right fixed-right">
             <SearchBar />
-
-            <FollowCardSide />
+            {connected && <FollowCardSide />}
           </Col>
         </Row>
       </Container>

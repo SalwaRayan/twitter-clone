@@ -41,7 +41,7 @@ const H4 = styled.h4`
 
 const Homepage = () => {
   const { user, setConnected, connected } = useContext(UserContext);
-  const [tweets, setTweets] = useState([]);
+  const [ tweets, setTweets ] = useState([]);
 
   useEffect(() => {
     verifyConnection();
@@ -56,25 +56,33 @@ const Homepage = () => {
 
   const getTweets = async () => {
     if (connected) {
-      const response = await fetch(
-        `http://localhost:5000/tweets/${user._id}/tweets`,
-        {
-          credentials: "include",
-        }
-      );
+      if (user.following.length === 0) {
+        const response = await fetch(
+          `http://localhost:5000/tweets/${user._id}/tweets`,
+          {
+            credentials: "include",
+          }
+        );
 
-      const data = await response.json();
+        const data = await response.json();
 
-      setTweets(data);
+        setTweets(data);
+      } else {
+        getAllTweets()
+      }
     } else {
-      const response = await fetch("http://localhost:5000/tweets", {
-        credentials: "include",
-      });
-
-      const data = await response.json();
-
-      setTweets(data);
+      getAllTweets()
     }
+  };
+
+  const getAllTweets = async () => {
+    const response = await fetch("http://localhost:5000/tweets", {
+      credentials: "include",
+    });
+
+    const data = await response.json();
+
+    setTweets(data);
   };
 
   if (!tweets) {
@@ -85,7 +93,7 @@ const Homepage = () => {
     <Main>
       <Container>
         <Row>
-          <Col xs={3} className="none width">
+          <Col xs={3} className="none">
             <Sidebar />
 
             {connected && (
@@ -131,7 +139,7 @@ const Homepage = () => {
               )}
             </ContainerView>
           </Col>
-          <Col xs={4} className="none-right width-right">
+          <Col xs={4} className="none-right fixed-right">
             <SearchBar />
             {connected && <FollowCardSide />}
           </Col>
