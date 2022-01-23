@@ -18,6 +18,7 @@ import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import FollowCardSide from "../components/FollowCardSide";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Main = styled.main`
   font-family: "Twitter";
@@ -99,7 +100,7 @@ const Icon = styled.div`
   padding-top: 20px;
   padding-bottom: 5px;
   border-bottom: 1px solid lightgrey;
-`
+`;
 
 // path => /:username/:idTweet/tweet
 
@@ -107,6 +108,8 @@ const Tweet = () => {
   const { connected, user, setUser } = useContext(UserContext);
   const { username, idTweet } = useParams();
   const [tweet, setTweet] = useState();
+  const [comment, setComment] = useState();
+  const [comments, setComments] = useState();
   const [countComment, setCountComment] = useState();
   const [countRetweet, setCountRetweet] = useState();
 
@@ -115,17 +118,38 @@ const Tweet = () => {
       content: "",
     },
     onSubmit: (values) => {
-      // postComment(values)
-      // getComment()
+      postComment(values);
+      // getAllComments();
       formik.resetForm();
     },
     validateOnChange: false,
-    validationSchema: "",
+    validationSchema: Yup.object({
+      content: Yup.string().required("comment needs a content to be posted"),
+    }),
   });
 
   useEffect(() => {
     getTweet();
-  }, []);
+    getAllComments();
+  }, [tweet, comments]);
+
+  const postComment = async (values) => {
+    const response = await fetch(
+      `http://localhost:5000/comments/${user._id}/${idTweet}`,
+      {
+        credentials: "include",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }
+    );
+
+    const data = await response.json();
+
+    setComment(data);
+  };
 
   const getTweet = async () => {
     const response = await fetch(`http://localhost:5000/tweets/${idTweet}`, {
@@ -144,7 +168,19 @@ const Tweet = () => {
     const data = await response.json();
 
     setTweet(data);
+  };
 
+  const getAllComments = async () => {
+    const response = await fetch(
+      `http://localhost:5000/tweets/comments/${idTweet}`,
+      {
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+    
+    setComments(data);
     countComments();
     countRetweets();
   };
@@ -164,8 +200,6 @@ const Tweet = () => {
     setCountRetweet(count);
   };
 
-  console.log(tweet);
-
   const date = moment(tweet.createdAt).local("fr").format("LT - D MMM YYYY");
 
   return (
@@ -182,7 +216,12 @@ const Tweet = () => {
             )}
           </Col>
 
-          <Col style={{ borderLeft: "1px solid lightgrey", borderRight: "1px solid lightgrey" }} >
+          <Col
+            style={{
+              borderLeft: "1px solid lightgrey",
+              borderRight: "1px solid lightgrey",
+            }}
+          >
             <Back>
               <FiArrowLeft className="arrow" />
               <h4
@@ -272,7 +311,14 @@ const Tweet = () => {
               </HoverIcons>
             </Icon>
             {connected && (
-              <div style={{ borderBottom: "1px solid lightgrey", display: "flex", flexDirection: "row", width: "100%" }} >
+              <div
+                style={{
+                  borderBottom: "1px solid lightgrey",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                }}
+              >
                 <ImageBox>
                   <Image
                     roundedCircle="true"
@@ -286,12 +332,12 @@ const Tweet = () => {
                   />
                 </ImageBox>
                 <Form
-                  // onSubmit={formik.handleSubmit}
+                  onSubmit={formik.handleSubmit}
                   style={{
                     display: "flex",
                     flexDirection: "row",
                     alignSelf: "center",
-                    width: "100%"
+                    width: "100%",
                   }}
                 >
                   <Form.Group>
@@ -303,14 +349,13 @@ const Tweet = () => {
                         overflow: "auto",
                         outline: "none",
                         resize: "none",
-                        width: "100%" 
+                        width: "100%",
                       }}
-                      // value={formik.values.content}
-                      // type="text"
-                      // placeholder="Quoi de neuf ?"
-                      // as="textarea"
-                      // aria-label="With textarea"
-                      // onChange={formik.handleChange}
+                      value={formik.values.content}
+                      type="text"
+                      placeholder="Tweetez votre réponse."
+                      as="input"
+                      onChange={formik.handleChange}
                     />
                   </Form.Group>
                   <Button type="submit">Répondre</Button>
@@ -318,7 +363,16 @@ const Tweet = () => {
               </div>
             )}
             <div>
-              <CommentCard />
+              {comments &&
+                comments.map((comment) => (
+                  <CommentCard
+                    username={comment.user.username}
+                    content={comment.content}
+                    photo={comment.user.profilePicture}
+                    usernameTweet={tweet.user.username}
+                    tweetId={tweet._id}
+                  />
+                ))}
             </div>
           </Col>
 
