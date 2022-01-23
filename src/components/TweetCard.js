@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
+// import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { BsDot } from "react-icons/bs";
 import { UserContext } from "../contexts/User";
+import { ImageBox } from "./styledComponents/StyledComponents";
 
 const Card = styled.div`
   /* background: orange; */
@@ -13,18 +14,6 @@ const Card = styled.div`
   border-bottom: 1px solid lightgrey;
   display: flex;
   flex-direction: row;
-`;
-
-const ImageBox = styled.div`
-  margin: 10px;
-  border-radius: 9999px;
-  // background: black;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
 `;
 
 const TweetInfo = styled.div`
@@ -122,7 +111,6 @@ const TweetCard = (props) => {
   }, []);
 
   const countComments = () => {
-    console.log(props.comments);
     const count = props.comments.length;
 
     setCountComment(count);
@@ -192,7 +180,9 @@ const TweetCard = (props) => {
             </div>
           </UserInfo>
           <Content>
-            <p>{props.content}</p>
+            <Link to={`/${props.username}/${props.tweet}/tweet`} className="link">
+              <p>{props.content}</p>
+            </Link>
           </Content>
           <Actions>
             <Icons>

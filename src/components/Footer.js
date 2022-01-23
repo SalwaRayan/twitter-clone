@@ -44,7 +44,7 @@ const Footer = () => {
       method: "delete",
     });
 
-    setConnected(false)
+    setConnected(false);
     navigate("/");
   };
 
@@ -57,7 +57,15 @@ const Footer = () => {
         }}
       >
         <Col xs={3}>
-          <Image roundedCircle="true" src={user.profilePicture}></Image>
+          <Image
+            roundedCircle="true"
+            style={{ width: 40 }}
+            src={
+              user.profilePicture === ""
+                ? `http://localhost:5000/22-01-2022-03-10-18-default_profile_400x400.png`
+                : `${user.profilePicture}`
+            }
+          />
         </Col>
         <Col xs={9}>
           <Row
@@ -68,7 +76,11 @@ const Footer = () => {
             }}
           >
             <Col>
-              <Link to={`/${user.username}`} className='link' style={{ height: 0, margin: 0, padding: 0  }}>
+              <Link
+                to={`/${user.username}`}
+                className="link"
+                style={{ height: 0, margin: 0, padding: 0 }}
+              >
                 <Text type="name">{user.username}</Text>
                 <Text type="username">@{user.username}</Text>
               </Link>

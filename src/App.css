@@ -13,6 +13,11 @@ body {
   flex-direction: column;
 }
 
+.fixed-right{
+  display: fixed;
+  top: 10px;
+}
+
 .p-sticky {
   position: sticky;
 }
@@ -76,13 +81,26 @@ html {
   align-self: flex-end;
 }
 
-@media (max-width: 488px) {
+.arrow {
+  font-size: 35px;
+  margin: 5px;
+  width: 40px;
+  height: 40px; 
+  padding: 5px;
+  border-radius: 9999px;
+}
+
+.arrow:hover{
+  background: #E7E7E8;
+}
+
+@media (max-width: 768px) {
   .none {
     display: none;
   }
 }
 
-@media (max-width: 1005px) {
+@media (max-width: 1205px) {
   .none-right {
     display: none;
   }
