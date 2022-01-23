@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Homepage from "./pages/Homepage";
 import Follow from "./pages/Follow";
 import Tweet from "./pages/Tweet";
-import User from "./pages/User";
+import Profile from "./pages/Profile";
 import UserList from "./pages/UserList";
 import NotFound from "./pages/NotFound";
 
@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/homepage" element={<Homepage />} />
-          <Route path="/:username" element={<User />} />
+          <Route path="/:username" element={<Profile />} />
           <Route path="/:username/:idTweet/tweet" element={<Tweet />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/:username/follow" element={<Follow />} />

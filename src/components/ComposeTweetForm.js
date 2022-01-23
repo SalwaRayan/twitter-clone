@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/User";
-import User from "../pages/User";
+import Profile from "../pages/Profile";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -79,7 +79,7 @@ const ComposeTweetForm = (props) => {
           Tweeter
         </Button>
       </Form>
-  );
-};
+  )
+}
 
-export default ComposeTweetForm;
+export default ComposeTweetForm
