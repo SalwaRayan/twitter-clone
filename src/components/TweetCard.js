@@ -164,7 +164,7 @@ const TweetCard = (props) => {
         <TweetInfo>
           <UserInfo>
             <SpaceLeft>
-              <Link to={`/${props.username}`} className="link">
+              <Link to={`/${props.username}`} className="link" style={{ width: "fit-content", height: 0, padding: 0, margin: 0}}>
                 <Text style={{ fontFamily: "Twitter Bold" }}>
                   {props.username}
                 </Text>
@@ -173,7 +173,7 @@ const TweetCard = (props) => {
               <Text style={{ color: "#96a0a8" }}>
                 <BsDot style={{ color: "#96a0a8" }} />
               </Text>
-              <Text style={{ color: "#96a0a8" }}>
+              <Text style={{ color: "#96a0a8", width: 360 }}>
                 {moment(props.createdAt).local("fr").format("LT - DD MMM YYYY")}
               </Text>
             </SpaceLeft>

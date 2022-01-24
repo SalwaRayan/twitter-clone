@@ -31,10 +31,12 @@ const Main = styled.main`
 const Button = styled.button`
   width: 50%;
   background: white;
-  color: ${props => props.isSelected === "Tweets" ? "black" : "#64737f"};
+  color: ${(props) => (props.isSelected ? "black" : "#64737f")};
   border: none;
-  text-decoration: ${props => props.isSelected === "Tweets" ? "underline" : "none"};
-`
+
+  text-decoration: ${(props) =>
+    props.isSelected ? "underline" : "none"};
+`;
 
 const Profile = () => {
   //modal upadte user profile
@@ -46,11 +48,12 @@ const Profile = () => {
   const [countFollowers, setCountFollowers] = useState();
   const [countFollowing, setCountFollowing] = useState();
   const [userInfo, setUserInfo] = useState({});
-  const [activeTab, setActiveTab] = useState("Tweets");
+  const [activeTab, setActiveTab] = useState();
 
   // componentDidmount hook
   useEffect(() => {
-    getUser()
+    getUser();
+    setActiveTab("Tweets");
   }, []);
 
   const getUser = async () => {
@@ -59,6 +62,17 @@ const Profile = () => {
     });
     const data = await response.json();
     setUserInfo(data);
+  };
+
+  const onCountFollowers = () => {
+    const count = userInfo.followers.length;
+
+    setCountFollowers(count);
+  };
+  const onCountFollowing = () => {
+    const count = userInfo.following.length;
+
+    setCountFollowing(count);
   };
 
   const onHandleClickFollow = async (id) => {
@@ -89,22 +103,11 @@ const Profile = () => {
     onCountFollowing();
   };
 
-  const onCountFollowers = () => {
-    const count = userInfo.followers.length;
-
-    setCountFollowers(count);
-  };
-  const onCountFollowing = () => {
-    const count = userInfo.following.length;
-
-    setCountFollowing(count);
-  };
-
   const handleButtonClick = (tab) => {
     setActiveTab(tab);
   };
 
-  console.log(userInfo);
+  console.log(activeTab);
 
   if (!userInfo) {
     return <p>Chargement...</p>;
@@ -192,7 +195,7 @@ const Profile = () => {
                   <p
                     style={{ marginLeft: 10, marginTop: 12, color: "#7d8a94" }}
                   >
-                    A rejoint Twitter en {" "}
+                    A rejoint Twitter en{" "}
                     {moment(userInfo.createdAt).local("fr").format("MMMM YYYY")}
                   </p>
                 </div>
@@ -222,7 +225,14 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div style={{ marginTop: 70, width: "100%", display: "flex", height: 50 }}>
+            <div
+              style={{
+                marginTop: 70,
+                width: "100%",
+                display: "flex",
+                height: 50,
+              }}
+            >
               <Button
                 isSelected={activeTab === "Tweets"}
                 onClick={() => handleButtonClick("Tweets")}
@@ -237,36 +247,38 @@ const Profile = () => {
               </Button>
             </div>
             <div>
-              {userInfo.tweets &&
-                activeTab === "Tweets" &&
-                userInfo.tweets.map((tweet) => {
-                  <TweetCard
-                    key={tweet._id}
-                    tweet={tweet._id}
-                    username={userInfo.username}
-                    content={tweet.content}
-                    photo={userInfo.profilePicture}
-                    comments={tweet.comments}
-                    retweets={tweet.retweets}
-                    userId={userInfo._id}
-                    createdAt={tweet.createdAt}
-                  />;
-                })}
+              {userInfo.tweets && activeTab === "Tweets"
+                ? userInfo.tweets.map((tweet) => {
+                    <TweetCard
+                      key={tweet._id}
+                      tweet={tweet._id}
+                      username={userInfo.username}
+                      content={tweet.content}
+                      photo={userInfo.profilePicture}
+                      comments={tweet.comments}
+                      retweets={tweet.retweets}
+                      userId={userInfo._id}
+                      createdAt={tweet.createdAt}
+                    />;
+                  })
+                : null}
             </div>
             <div>
-              {userInfo.comments &&
-                activeTab === "Tweets" &&
-                userInfo.comments.map((comment) => {
-                  <CommentCard
-                    key={comment._id}
-                    comment={comment._id}
-                    username={userInfo.username}
-                    content={comment.content}
-                    photo={userInfo.profilePicture}
-                    userId={userInfo._id}
-                    createdAt={comment.createdAt}
-                  />;
-                })}
+              {userInfo.comments && activeTab === "Réponses"
+                ? userInfo.comments.map((comment) => {
+                    <CommentCard
+                      key={comment._id}
+                      comment={comment._id}
+                      username={userInfo.username}
+                      content={comment.content}
+                      photo={userInfo.profilePicture}
+                      userId={userInfo._id}
+                      createdAt={comment.createdAt}
+                      userId={userInfo._id}
+                      commentId={comment._id}
+                    />;
+                  })
+                : null}
             </div>
           </Col>
 
