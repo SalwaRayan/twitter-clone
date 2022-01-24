@@ -9,7 +9,8 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Homepage from "./pages/Homepage";
-import Follow from "./pages/Follow";
+import Followers from "./pages/Followers";
+import Following from "./pages/Following";
 import Tweet from "./pages/Tweet";
 import Profile from "./pages/Profile";
 import UserList from "./pages/UserList";
@@ -28,7 +29,8 @@ const App = () => {
           <Route path="/:username" element={<Profile />} />
           <Route path="/:username/:idTweet/tweet" element={<Tweet />} />
           <Route path="/users" element={<UserList />} />
-          <Route path="/:username/follow" element={<Follow />} />
+          <Route path="/:username/followers" element={<Followers />} />
+          <Route path="/:username/following" element={<Following />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </UserContextProvider>

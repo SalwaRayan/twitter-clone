@@ -6,9 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import { IoMdClose } from "react-icons/io";
 
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
 import { UserContext } from "../contexts/User";
+
+import { useParams } from "react-router-dom";
 
 const Button = styled.button`
   background-color: #1da1f2;
@@ -32,7 +36,7 @@ const Close = styled.button`
   }
 `;
 
-const TweetBody = styled.div`
+const CommentBody = styled.div`
   display: flex;
   flex-direction: row;
 `;
@@ -52,27 +56,29 @@ const ImageBox = styled.div`
   }
 `;
 
-const ModalTweet = ({ show, onHide }) => {
+const ModalComment = ({ show, onHide }) => {
+
+  const { idTweet } = useParams()
   const { user } = useContext(UserContext)
-  const [tweet, setTweet] = useState({});
+  const [comment, setComment] = useState({});
 
   const formik = useFormik({
     initialValues: {
       content: "",
     },
     onSubmit: (values) => {
-      postTweet(values);
+      postComment(values);
       formik.resetForm();
       onHide()
     },
     validateOnChange: false,
     validationSchema: Yup.object({
-      content: Yup.string().required("tweet needs a content to be posted"),
+      content: Yup.string().required("Comment needs a content to be posted"),
     }),
   });
 
-  const postTweet = async (values) => {
-    const response = await fetch(`http://localhost:5000/tweets/${user._id}`, {
+  const postComment = async (values) => {
+    const response = await fetch(`http://localhost:5000/comments/${user._id}/${idTweet}`, {
       credentials: "include",
       method: "post",
       headers: {
@@ -83,7 +89,7 @@ const ModalTweet = ({ show, onHide }) => {
 
     const data = await response.json();
 
-    setTweet(data);
+    setComment(data);
   };
 
   return (
@@ -97,7 +103,7 @@ const ModalTweet = ({ show, onHide }) => {
       </Modal.Header>
 
       <Modal.Body>
-        <TweetBody>
+        <CommentBody>
           <ImageBox>
             <Link to={`/${user.username}`}>
               <Image
@@ -134,18 +140,18 @@ const ModalTweet = ({ show, onHide }) => {
                 }}
                 value={formik.values.content}
                 type="text"
-                placeholder="Quoi de neuf ?"
+                placeholder="Tweetez votre réponse."
                 as="textarea" 
                 aria-label="With textarea"
                 onChange={formik.handleChange}
               />
             </Form.Group>
-            <Button type="submit">Tweeter</Button>
+            <Button type="submit">Commenter</Button>
           </Form>
-        </TweetBody>
+        </CommentBody>
       </Modal.Body>
     </Modal>
   );
 };
 
-export default ModalTweet
+export default ModalComment

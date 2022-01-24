@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BsDot } from "react-icons/bs";
 import { UserContext } from "../contexts/User";
 import { ImageBox } from "./styledComponents/StyledComponents";
+import ModalComment from "./ModalComment";
 
 const Card = styled.div`
   /* background: orange; */
@@ -100,10 +101,12 @@ const Button = styled.button`
   }
 `;
 
+
 const TweetCard = (props) => {
   const { user } = useContext(UserContext);
   const [countComment, setCountComment] = useState();
   const [countRetweet, setCountRetweet] = useState();
+  const [commentModalShow, setCommentModalShow] = useState(false);
 
   useEffect(() => {
     countComments();
@@ -185,7 +188,7 @@ const TweetCard = (props) => {
             </Link>
           </Content>
           <Actions>
-            <Icons>
+            <Icons onClick={() => setCommentModalShow(true)}>
               <HoverIcons name="comment">
                 <svg
                   style={{
@@ -204,6 +207,10 @@ const TweetCard = (props) => {
               </HoverIcons>
               <p>{countComment}</p>
             </Icons>
+            <ModalComment 
+              show={commentModalShow}
+              onHide={() => setCommentModalShow(false)}
+            />
             <Icons>
               <HoverIcons name="retweet">
                 <svg

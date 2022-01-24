@@ -13,6 +13,7 @@ import FollowCardSide from "../components/FollowCardSide"
 import { UserContext } from "../contexts/User"
 
 import cameraLogo from '../images/camera.png'
+import { Link } from "react-router-dom"
 
 const Main = styled.main`
   font-family: "Twitter Bold";
@@ -41,7 +42,11 @@ const User = () => {
 
           {/* CENTER */}
           <Col style={{ width: 10, paddingTop: 20, display: 'flex', flexDirection: 'column' }}>
-
+              <Link 
+                to={`/${username}/followers`}
+              >
+                followers
+              </Link>
             <div style={{ backgroundColor: "lightgrey", width: "100%", paddingTop: 100, display: 'flex', }}>
               <Container style={{ width: 130, height: 130, backgroundColor: "lightblue", borderRadius: 9999, position: 'relative', marginTop: 33, marginLeft: 30, bottom: -65 }}>
                 <input type="file" id="actual-btn" />

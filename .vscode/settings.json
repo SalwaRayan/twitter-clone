@@ -1,0 +1,5 @@
+{
+    "notebook.cellToolbarVisibility": "hover",
+    "workbench.view.alwaysShowHeaderActions": true,
+    "editor.hideCursorInOverviewRuler": true
+}
