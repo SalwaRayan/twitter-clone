@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { FiArrowLeft } from 'react-icons/fi'
 
 import { FlexFooter } from "../components/FlexFooter";
 
@@ -90,6 +91,12 @@ const ContainerView = styled.div`
   z-index: 5;
 `;
 
+const Back = styled.div`
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+`;
+
 const UserList = () => {
   const { user, setUser, connected, users, getUsers } = useContext(UserContext);
 
@@ -141,6 +148,18 @@ const UserList = () => {
             )}
           </Col>
           <Col>
+          <Back>
+              <FiArrowLeft className="arrow" />
+              <h4
+                style={{
+                  fontFamily: "Twitter bold",
+                  marginTop: 10,
+                  marginLeft: 10,
+                }}
+              >
+                Utilisateurs
+              </h4>
+            </Back>
             <ContainerView>
               {users.map((userElement) => 
                 

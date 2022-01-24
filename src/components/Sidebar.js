@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 import { Nav, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi'
+
 import { UserContext } from "../contexts/User";
 import ModalTweet from "./ModalTweet";
 
@@ -108,7 +111,8 @@ const Sidebar = () => {
         defaultActiveKey="/home"
         className="flex-column center"
         style={{ position: "fixed", alignItems: "flex-start" }}
-      >
+      > 
+       {/* Acceuil */}
         <Nav.Link
           href={connected ? "/homepage" : "/"}
           style={{ marginLeft: 10, flexWrap: "none" }}
@@ -127,9 +131,11 @@ const Sidebar = () => {
             <Col xs={12} md={10} className="none-big"></Col>
           </Row>
         </Nav.Link>
+
+        {/* Homepage */}
         <Nav.Link
           eventKey="/homepage"
-          href="/homepage"
+          to="/homepage"
           style={{ color: "black", marginLeft: 10, flexWrap: "none" }}
         >
           <Hover>
@@ -147,18 +153,50 @@ const Sidebar = () => {
                     <path d="M8.22 12.184c0 2.084 1.695 3.78 3.78 3.78s3.78-1.696 3.78-3.78-1.695-3.78-3.78-3.78-3.78 1.696-3.78 3.78zm6.06 0c0 1.258-1.022 2.28-2.28 2.28s-2.28-1.022-2.28-2.28 1.022-2.28 2.28-2.28 2.28 1.022 2.28 2.28z"></path>
                   </g>
                 </Svg>
-                {/* <Svg viewBox="0 0 24 24" aria-hidden="true">
-              <g>
-                <path d="M22.58 7.35L12.475 1.897c-.297-.16-.654-.16-.95 0L1.425 7.35c-.486.264-.667.87-.405 1.356.18.335.525.525.88.525.16 0 .324-.038.475-.12l.734-.396 1.59 11.25c.216 1.214 1.31 2.062 2.66 2.062h9.282c1.35 0 2.444-.848 2.662-2.088l1.588-11.225.737.398c.485.263 1.092.082 1.354-.404.263-.486.08-1.093-.404-1.355zM12 15.435c-1.795 0-3.25-1.455-3.25-3.25s1.455-3.25 3.25-3.25 3.25 1.455 3.25 3.25-1.455 3.25-3.25 3.25z"></path>
-              </g>
-            </Svg> */}
               </Col>
               <Col xs={12} md={10} className="none-big">
-                <Text>Acceuil</Text>
-              </Col>
+                  <Link
+                    to={`/homepage`}
+                    className="link"
+                    style={{ height: 0, margin: 0, padding: 0 }}
+                  >
+                    <Text>Acceuil</Text>
+                  </Link>
+                </Col>
             </Row>
           </Hover>
         </Nav.Link>
+
+        {/* List User */}
+        <Nav.Link
+          eventKey="/homepage"
+          style={{ color: "black", marginLeft: 10, flexWrap: "none" }}
+        >
+          <Hover>
+            <Row
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "none",
+              }}
+            >
+              <Col xs={6} md={2} style={{ marginRight: 9 }}>
+                <HiOutlineDotsCircleHorizontal style={{fontSize: 25}} />
+              </Col>
+              <Col xs={12} md={10} className="none-big">
+                  <Link
+                    to={`/users`}
+                    className="link"
+                    style={{ height: 0, margin: 0, padding: 0 }}
+                  >
+                    <Text>Liste utilisateurs</Text>
+                  </Link>
+                </Col>
+            </Row>
+          </Hover>
+        </Nav.Link>
+
+        {/* Profile */}
         {connected && (
           <Nav.Link
             eventKey="profile"
@@ -186,6 +224,7 @@ const Sidebar = () => {
             </Hover>
           </Nav.Link>
         )}
+
         {connected && (
           <>
             <Button onClick={() => setModalShow(true)}>
