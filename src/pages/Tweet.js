@@ -373,7 +373,7 @@ const Tweet = () => {
                     usernameTweet={tweet.user.username}
                     tweetId={tweet._id}
                     createdAt={comment.createdAt}
-                    userId={comment.user}
+                    userId={comment.user._id}
                     commentId={comment._id}
                   />
                 ))}

@@ -186,7 +186,7 @@ const FollowCardSide = () => {
                   </Button>
                 ) : (
                   <Button onClick={() => onHandleClickFollow(userElement._id)}>
-                    Suivi
+                    Suivre
                   </Button>
                 )
               ) : null}

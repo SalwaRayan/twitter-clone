@@ -52,6 +52,9 @@ const CommentCard = ({
 }) => {
   const { user } = useContext(UserContext)
 
+  // console.log("userId: ", userId)
+  // console.log("user._id: ", user._id)
+
   const deleteComment = async (id) => {
     const response = await fetch(`http://localhost:5000/comments/${id}`, { 
       credentials: "include",
