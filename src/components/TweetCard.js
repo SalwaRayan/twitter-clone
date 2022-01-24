@@ -225,6 +225,7 @@ const TweetCard = (props) => {
             <ModalComment 
               show={commentModalShow}
               onHide={() => setCommentModalShow(false)}
+              idTweet={props.tweet}
             />
             <Icons>
               <HoverIcons name="retweet">

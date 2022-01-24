@@ -14,7 +14,6 @@ import Login from "./Login";
 const Main = styled.main`
     background-color: #fff;
     min-width: 100vw;
-    font-family: 'Twitter Bold';
     display: flex;
     align-self: center;
     align-content: center;
@@ -57,11 +56,13 @@ const H1 = styled.h1`
     font-size: 50px; 
     margin-top: 25px; 
     margin-bottom: 35px; 
+    font-family: 'Twitter Extended Heavy';
     /* margin-left: 100px; */
 `
 
 const H2 = styled.h2`
     font-size: 25px; 
+    font-family: 'Twitter Extended Heavy';
 `
 
 const Home = () => {
@@ -90,13 +91,13 @@ const Home = () => {
                         <Button
                             style={{
                                 fontSize: 22,
-                                marginLeft: 100,
                                 marginTop: 40,
                                 borderRadius: 50, 
                                 paddingLeft: 60,
                                 paddingRight: 60,
                                 borderColor: "#1DA1f2",
-                                background: "#1DA1F2"
+                                background: "#1DA1F2",
+                                fontFamily: 'Twitter Bold'
                             }}
                             onClick={() => setModalShowSignup(true)}
                         >
@@ -108,7 +109,7 @@ const Home = () => {
                         />
 
                         <Link to="/login" style={{ color: "black", textDecoration: "none", marginLeft: 100, }}>
-                            <h3 style={{ marginTop: 70 }} mt={2} >
+                            <h3 style={{ marginTop: 70, fontFamily: 'Twitter Extended Heavy' }} mt={2} >
                                 Vous avez déjà un compte ?
                             </h3>
                         </Link>
@@ -116,11 +117,11 @@ const Home = () => {
                             variant="dark"
                             style={{
                                 fontSize: 22,
-                                marginLeft: 100,
                                 marginTop: 2,
                                 borderRadius: 50,
                                 paddingLeft: 47,
-                                paddingRight: 47
+                                paddingRight: 47,
+                                fontFamily: 'Twitter Bold'
                             }}
                             onClick={() => setModalShowLogin(true)}
                         >

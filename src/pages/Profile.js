@@ -256,7 +256,7 @@ const Profile = () => {
             <div>
               {userInfo.comments &&
                 activeTab === "Tweets" &&
-                userInfo.comment.map((comment) => {
+                userInfo.comments.map((comment) => {
                   <CommentCard
                     key={comment._id}
                     comment={comment._id}

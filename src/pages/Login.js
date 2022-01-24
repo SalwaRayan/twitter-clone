@@ -40,7 +40,6 @@ const Login = props => {
       email: "",
       password: "",
     },
-
     onSubmit: values => {
       login(values)
     },

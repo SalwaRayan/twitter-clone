@@ -134,6 +134,7 @@ const Sidebar = () => {
 
         {/* Homepage */}
         <Nav.Link
+          
           eventKey="/homepage"
           to="/homepage"
           style={{ color: "black", marginLeft: 10, flexWrap: "none" }}
@@ -228,7 +229,7 @@ const Sidebar = () => {
         {connected && (
           <>
             <Button onClick={() => setModalShow(true)}>
-              <Text>Tweeter</Text>
+              <Text style={{ fontFamily: "Twitter Bold" }}>Tweeter</Text>
               <SvgTweet viewBox="0 0 24 24" aria-hidden="true">
                 <g>
                   <path

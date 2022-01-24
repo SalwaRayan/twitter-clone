@@ -24,6 +24,7 @@ export default createGlobalStyle`
         url(${ChirpBoldWebWoff2}) format('woff2'),
         url(${ChirpBoldWebWoff}) format('woff');
     }
+    
     @font-face {
         font-family: 'Twitter Regular';
         src: local('Twitter Regular'),

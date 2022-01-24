@@ -56,9 +56,8 @@ const ImageBox = styled.div`
   }
 `;
 
-const ModalComment = ({ show, onHide }) => {
+const ModalComment = ({ show, onHide, idTweet }) => {
 
-  const { idTweet } = useParams()
   const { user } = useContext(UserContext)
   const [comment, setComment] = useState({});
 
@@ -90,6 +89,7 @@ const ModalComment = ({ show, onHide }) => {
     const data = await response.json();
 
     setComment(data);
+    console.log(values)
   };
 
   return (
