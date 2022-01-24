@@ -102,7 +102,7 @@ const Homepage = () => {
               </FlexFooter>
             )}
           </Col>
-          <Col>
+          <Col  xs={6}>
             <ContainerView>
               <Header>
                 <H4>Accueil</H4>
@@ -143,7 +143,7 @@ const Homepage = () => {
               )}
             </ContainerView>
           </Col>
-          <Col xs={4} className="none-right fixed-right">
+          <Col xs={3} className="none-right fixed-right">
             <SearchBar />
             {connected && <FollowCardSide />}
           </Col>

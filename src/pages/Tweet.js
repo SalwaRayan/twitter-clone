@@ -170,6 +170,17 @@ const Tweet = () => {
     getAllComments();
   };
 
+  const countComments = () => {
+    const count = tweet.comments.length;
+
+    setCountComment(count);
+  };
+  const countRetweets = () => {
+    const count = tweet.retweets.length;
+
+    setCountRetweet(count);
+  };
+
   const getAllComments = async () => {
     const response = await fetch(
       `http://localhost:5000/tweets/comments/${idTweet}`,
@@ -188,17 +199,6 @@ const Tweet = () => {
   if (!tweet) {
     return <p>Chargement....</p>;
   }
-
-  const countComments = () => {
-    const count = tweet.comments.length;
-
-    setCountComment(count);
-  };
-  const countRetweets = () => {
-    const count = tweet.retweets.length;
-
-    setCountRetweet(count);
-  };
 
   const date = moment(tweet.createdAt).local("fr").format("LT - D MMM YYYY");
 
@@ -373,6 +373,8 @@ const Tweet = () => {
                     usernameTweet={tweet.user.username}
                     tweetId={tweet._id}
                     createdAt={comment.createdAt}
+                    userId={comment.user}
+                    commentId={comment._id}
                   />
                 ))}
             </div>
