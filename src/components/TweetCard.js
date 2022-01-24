@@ -173,7 +173,7 @@ const TweetCard = (props) => {
               <Text style={{ color: "#96a0a8" }}>
                 <BsDot style={{ color: "#96a0a8" }} />
               </Text>
-              <Text style={{ color: "#96a0a8", width: 360 }}>
+              <Text style={{ color: "#96a0a8" }}>
                 {moment(props.createdAt).local("fr").format("LT - DD MMM YYYY")}
               </Text>
             </SpaceLeft>
