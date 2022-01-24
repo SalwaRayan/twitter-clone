@@ -113,6 +113,7 @@ const Homepage = () => {
                   {/* if connected show only tweets of user followed, if no user is followed show all tweets */}
                   {tweets.map((tweet) => (
                     <TweetCard
+                      key={tweet._id}
                       tweet={tweet._id}
                       username={tweet.user.username}
                       content={tweet.content}
@@ -120,6 +121,7 @@ const Homepage = () => {
                       comments={tweet.comments}
                       retweets={tweet.retweets}
                       userId={tweet.user._id}
+                      createdAt={tweet.createdAt}
                     />
                   ))}
                 </>
@@ -127,6 +129,7 @@ const Homepage = () => {
                 // if not connected show all tweets
                 tweets.map((tweet) => (
                   <TweetCard
+                    key={tweet._id}
                     tweet={tweet._id}
                     username={tweet.user.username}
                     content={tweet.content}
@@ -134,6 +137,7 @@ const Homepage = () => {
                     comments={tweet.comments}
                     retweets={tweet.retweets}
                     userId={tweet.user._id}
+                    createdAt={tweet.createdAt}
                   />
                 ))
               )}

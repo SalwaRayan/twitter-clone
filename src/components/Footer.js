@@ -65,6 +65,7 @@ const Footer = () => {
                 ? `http://localhost:5000/22-01-2022-03-10-18-default_profile_400x400.png`
                 : `${user.profilePicture}`
             }
+            onClick={logout}
           />
         </Col>
         <Col xs={9}>

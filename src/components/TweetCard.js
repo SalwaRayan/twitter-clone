@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BsDot } from "react-icons/bs";
 import { UserContext } from "../contexts/User";
 import { ImageBox } from "./styledComponents/StyledComponents";
+import moment from "moment";
 
 const Card = styled.div`
   /* background: orange; */
@@ -15,6 +16,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
 
 const TweetInfo = styled.div`
   display: flex;
@@ -102,24 +104,6 @@ const Button = styled.button`
 
 const TweetCard = (props) => {
   const { user } = useContext(UserContext);
-  const [countComment, setCountComment] = useState();
-  const [countRetweet, setCountRetweet] = useState();
-
-  useEffect(() => {
-    countComments();
-    countRetweets();
-  }, []);
-
-  const countComments = () => {
-    const count = props.comments.length;
-
-    setCountComment(count);
-  };
-  const countRetweets = () => {
-    const count = props.retweets.length;
-
-    setCountRetweet(count);
-  };
 
   const deleteTweet = async (id) => {
     const response = await fetch(`http://localhost:5000/tweets/${id}`, {
@@ -146,7 +130,15 @@ const TweetCard = (props) => {
     <div style={{ width: "100%" }}>
       <Card>
         <ImageBox>
-          <Image />
+          <Image
+            roundedCircle="true"
+            style={{ width: 40 }}
+            src={
+              props.photo === ""
+                ? `http://localhost:5000/22-01-2022-03-10-18-default_profile_400x400.png`
+                : `${props.photo}`
+            }
+          />
         </ImageBox>
         <TweetInfo>
           <UserInfo>
@@ -160,7 +152,9 @@ const TweetCard = (props) => {
               <Text style={{ color: "#96a0a8" }}>
                 <BsDot style={{ color: "#96a0a8" }} />
               </Text>
-              <Text style={{ color: "#96a0a8" }}>2h</Text>
+              <Text style={{ color: "#96a0a8" }}>
+                {moment(props.createdAt).local("fr").format("LT - DD MMM YYYY")}
+              </Text>
             </SpaceLeft>
             <div>
               {props.userId === user._id && (
@@ -180,7 +174,10 @@ const TweetCard = (props) => {
             </div>
           </UserInfo>
           <Content>
-            <Link to={`/${props.username}/${props.tweet}/tweet`} className="link">
+            <Link
+              to={`/${props.username}/${props.tweet}/tweet`}
+              className="link"
+            >
               <p>{props.content}</p>
             </Link>
           </Content>
@@ -202,7 +199,7 @@ const TweetCard = (props) => {
                   </G>
                 </svg>
               </HoverIcons>
-              <p>{countComment}</p>
+              <p>{props.comments.length}</p>
             </Icons>
             <Icons>
               <HoverIcons name="retweet">
@@ -221,7 +218,7 @@ const TweetCard = (props) => {
                   </G>
                 </svg>
               </HoverIcons>
-              <p>{countRetweet}</p>
+              <p>{props.retweets.length}</p>
             </Icons>
           </Actions>
         </TweetInfo>

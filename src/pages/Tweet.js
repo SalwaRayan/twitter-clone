@@ -130,7 +130,6 @@ const Tweet = () => {
 
   useEffect(() => {
     getTweet();
-    getAllComments();
   }, [tweet, comments]);
 
   const postComment = async (values) => {
@@ -168,6 +167,7 @@ const Tweet = () => {
     const data = await response.json();
 
     setTweet(data);
+    getAllComments();
   };
 
   const getAllComments = async () => {
@@ -179,7 +179,7 @@ const Tweet = () => {
     );
 
     const data = await response.json();
-    
+
     setComments(data);
     countComments();
     countRetweets();
@@ -366,11 +366,13 @@ const Tweet = () => {
               {comments &&
                 comments.map((comment) => (
                   <CommentCard
+                    key={comment._id}
                     username={comment.user.username}
                     content={comment.content}
                     photo={comment.user.profilePicture}
                     usernameTweet={tweet.user.username}
                     tweetId={tweet._id}
+                    createdAt={comment.createdAt}
                   />
                 ))}
             </div>
